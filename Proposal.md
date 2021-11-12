@@ -20,10 +20,10 @@ With respect to the actual idea, it is definitely a bit abstract, and would requ
 With respect to the implementation, as with essentially all tasks involving transformer-based models, it is perhaps computationally expensive to be able to analyze more and more data (in the form of multiple fragments from books in this project). Furthermore, I personally don’t have a lot of experience with all the different types of strategies that could be employed in this project. While I currently have a method of scoring based on grammatical embeddings, there could well be a better or easier method to accomplish what I’m trying to accomplish. 
 
 # Citations:
-1. Free eBooks | Project Gutenberg
-2. [1812.08092] A standardized Project Gutenberg corpus for statistical analysis of natural language and quantitative linguistics (arxiv.org)
-3. Stony Book
-4. 78447 700..712 (emerald.com)
-5. pgcorpus/gutenberg: Pipeline to generate the Standardized Project Gutenberg Corpus (github.com)
-6. [1909.02597] Investigating BERT's Knowledge of Language: Five Analysis Methods with NPIs (arxiv.org)
+1. https://gutenberg.org/
+2. https://arxiv.org/abs/1812.08092
+3. https://stonybook.org/
+4. https://www.emerald.com/insight/content/doi/10.1108/00220410510632040/full/pdf?title=reading-behavior-in-the-digital-environment-changes-in-reading-behavior-over-the-past-ten-years
+5. https://arxiv.org/abs/1909.02597
 7. https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2760185.pdf
+8. https://github.com/arthtalati/Deep-Learning-based-Authorship-Identification
