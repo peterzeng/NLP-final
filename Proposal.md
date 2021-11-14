@@ -1,4 +1,4 @@
-# Author Style Detection 
+# Author Detection 
 
 # Idea
 Throughout history, literature has played a vast and important role in nearly every aspect of human life. Books have inspired entertainment in the form of music, films, artwork -- just to name a few -- as well as laying out grand ideas for the research and development of new systems and inventions. However, in this day and age, it seems that there is a trend where less people are reading written literature [4], and after a period of being forced to read in their primary education, they might cease reading altogether later on.
