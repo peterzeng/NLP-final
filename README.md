@@ -27,3 +27,4 @@ With respect to the implementation, as with essentially all tasks involving tran
 5. https://arxiv.org/abs/1909.02597
 7. https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2760185.pdf
 8. https://github.com/arthtalati/Deep-Learning-based-Authorship-Identification
+9. https://dylancastillo.co/nlp-snippets-cluster-documents-using-word2vec/
