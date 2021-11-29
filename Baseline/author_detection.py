@@ -30,6 +30,10 @@ auth_sort = sorted(train_dataframe['Author'].unique())
 dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
 swap_dict = {value:key for key, value in dictOfAuthors.items()}
 train_dataframe['Author_num'] = train_dataframe['Author'].map(swap_dict)
+
+auth_sort = sorted(test_dataframe['Author'].unique())
+dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
+swap_dict = {value:key for key, value in dictOfAuthors.items()}
 test_dataframe['Author_num'] = test_dataframe['Author'].map(swap_dict)
 
 train_dataframe = train_dataframe.drop(columns="Author")
@@ -38,10 +42,10 @@ test_dataframe = test_dataframe.drop(columns="Author")
 list_to_choose_train = train_dataframe.text.apply(lambda x : len(x)) > 0 
 train_df_article = train_dataframe[list_to_choose_train]
 list_to_choose_test = test_dataframe.text.apply(lambda x : len(x)) > 0 
-test_df_article = test_dataframe[list_to_choose_train]
+test_df_article = test_dataframe[list_to_choose_test]
 
-train_df_article.to_csv('train_7030.csv', index = False)
-test_df_article.to_csv('test_7030.csv', index = False)
+train_df_article.to_csv('new_train.csv', index = False)
+test_df_article.to_csv('new_test.csv', index = False)
 
 import torch
 from torchtext.legacy import data
@@ -52,11 +56,11 @@ datafields = [("text", TEXT),
               ("Author_num", SCORE)]
 
 train= data.TabularDataset(
-    path='train_7030.csv', 
+    path='new_train.csv', 
     format='csv',fields=datafields,skip_header = True)
 
 val = data.TabularDataset(
-    path='test_7030.csv', 
+    path='new_test.csv', 
     format='csv',fields=datafields,skip_header = True)
 
 from torchtext import vocab

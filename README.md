@@ -20,7 +20,10 @@ With respect to the actual idea, it is definitely a bit abstract, and would requ
 With respect to the implementation, as with essentially all tasks involving transformer-based models, it is perhaps computationally expensive to be able to analyze more and more data (in the form of multiple fragments from books in this project). Furthermore, I personally don’t have a lot of experience with all the different types of strategies that could be employed in this project. While I currently have a method of scoring based on grammatical embeddings, there could well be a better or easier method to accomplish what I’m trying to accomplish. 
 
 # FINAL PROGRESS REPORT UPDATE
-At this point, I've automated the process of converting the base xmls to the data, and the only manual work that I did was removing any authors that wouldn't make sense when evaluating ("unknown", "various"), and consolidating different names for the same author.
+At this point, I've automated the process of converting the base xmls to the data, and the only manual work that I did was removing any authors that wouldn't make sense when evaluating ("unknown", "various").
+
+# Results
+
 
 # Citations:
 1. https://gutenberg.org/

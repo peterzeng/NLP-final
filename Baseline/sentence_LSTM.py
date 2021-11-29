@@ -1,5 +1,5 @@
 ### THIS CODE IS TAKEN FROM https://github.com/arthtalati/Deep-Learning-based-Authorship-Identification/blob/master/sentence_gru_lstm.ipynb
-### FOR LEARNING ONLY, AND FOR TESTING MY DATA REPRESENTATIONS
+### Baseline Accuracies
 
 import pandas as pd
 import numpy as np
@@ -13,7 +13,6 @@ nltk.download('wordnet')
 nltk.download('punkt')
 lemmatizer = WordNetLemmatizer()
 
-
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 import numpy as np
@@ -21,7 +20,6 @@ import re
 import string
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
-
 
 train_file_df = pd.read_csv("train.csv")
 test_file_df = pd.read_csv("test.csv")
@@ -31,8 +29,10 @@ dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
 swap_dict = {value:key for key, value in dictOfAuthors.items()}
 train_file_df['Author_num'] = train_file_df['Author'].map(swap_dict)
 
-test_file_df['Author_num'] = test_file_df['Author'].map(swap_dict)
-
+auth_sort = sorted(test_dataframe['Author'].unique())
+dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
+swap_dict = {value:key for key, value in dictOfAuthors.items()}
+test_dataframe['Author_num'] = test_dataframe['Author'].map(swap_dict)
 test_file_df = test_file_df.drop(columns='Author')
 train_file_df = train_file_df.drop(columns='Author')
 
@@ -42,8 +42,8 @@ test_file_df_choosen = test_file_df[list_to_choose_test]
 list_to_choose_train = train_file_df.text.apply(lambda x : len(x)) > 0 
 train_file_df_choosen = train_file_df[list_to_choose_train]
 
-train_file_df_choosen.to_csv('train_chosen.csv', index = False)
-test_file_df_choosen.to_csv('test_chosen.csv', index = False)
+train_file_df_choosen.to_csv('sentence_train.csv', index = False)
+test_file_df_choosen.to_csv('sentence_test.csv', index = False)
 
 import torch
 from torchtext.legacy import data
@@ -53,12 +53,12 @@ SCORE = data.Field(sequential=False, use_vocab=False)
 datafields = [("text", TEXT),
               ("Author_num", SCORE)]
 
-train= data.TabularDataset(
-    path='train_chosen.csv', 
+train = data.TabularDataset(
+    path='sentence_train.csv', 
     format='csv',fields=datafields,skip_header = True)
 
 val = data.TabularDataset(
-    path='test_chosen.csv', 
+    path='sentence_test.csv', 
     format='csv',fields=datafields,skip_header = True)
 
 from torchtext import vocab
@@ -100,7 +100,6 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 
 class AuthorClassifier(nn.Module):
-
 
     def __init__(self, mode, output_size, hidden_size, vocab_size, embedding_length, word_embeddings):
       super(AuthorClassifier, self).__init__()
@@ -193,6 +192,7 @@ def train_classifier(model, dataset_iterator, loss_function, optimizer, num_epoc
         writer.add_scalar("F1 Score/train", f1/f1_step, step)
         
       step = step+1
+
     f1score_train.append(f1/f1_step)
     accuracy_train.append(correct/total)
     loss_train.append(total_loss/total)
