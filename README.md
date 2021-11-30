@@ -36,3 +36,4 @@ At this point, I've automated the process of converting the base xmls to the dat
 8. https://dylancastillo.co/nlp-snippets-cluster-documents-using-word2vec/
 9. https://towardsdatascience.com/nlp-extract-contextualized-word-embeddings-from-bert-keras-tf-67ef29f60a7b
 10. https://github.com/huggingface/tokenizers
+11. https://dylancastillo.co/nlp-snippets-cluster-documents-using-word2vec/

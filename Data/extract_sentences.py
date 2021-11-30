@@ -1,7 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 import pandas as pd
-
+import csv
 sequences = []
 authors = {}
 
@@ -46,7 +46,7 @@ for file in os.listdir(dir):
             sequence = []
             for j in range(25):
                 sequence.append(words[i*25 + j])
-            sequences.append([sequence, author])
+            sequences.append((sequence, author))
         num_authors += 1
         
 # print(sequences)
