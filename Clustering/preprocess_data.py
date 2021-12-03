@@ -12,7 +12,7 @@ dir = '../Data/base'
 num_books = 0
 
 for file in os.listdir(dir):
-    if num_books < 99:
+    if num_books < 20:
         filename = os.path.join(dir, file)
         tree = ET.parse(filename)
         root = tree.getroot()
@@ -68,4 +68,4 @@ auth_sort = sorted(corpus['author'].unique())
 dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
 swap_dict = {value:key for key, value in dictOfAuthors.items()}
 corpus['author_num'] = corpus['author'].map(swap_dict)
-corpus.to_csv("full-corpus.csv", header = True, index=False)
+corpus.to_csv("corpus.csv", header = True, index=False)

@@ -1,5 +1,5 @@
 # BASELINE RESULTS
-# Initially, we'll only look at one author as training and testing
+# Initially, we'll only look at classifying author as training and testing
 import pandas as pd
 import numpy as np
 import os
@@ -23,29 +23,6 @@ from sklearn.preprocessing import StandardScaler
 # CODE FROM https://github.com/arthtalati/Deep-Learning-based-Authorship-Identification/blob/master/Article_level_lstm.ipynb
 # BASELINE RESULTS
 
-train_dataframe = pd.read_csv("train.csv")
-test_dataframe = pd.read_csv("test.csv")
-
-auth_sort = sorted(train_dataframe['Author'].unique())
-dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
-swap_dict = {value:key for key, value in dictOfAuthors.items()}
-train_dataframe['Author_num'] = train_dataframe['Author'].map(swap_dict)
-
-auth_sort = sorted(test_dataframe['Author'].unique())
-dictOfAuthors = { i : auth_sort[i] for i in range(0, len(auth_sort) ) }
-swap_dict = {value:key for key, value in dictOfAuthors.items()}
-test_dataframe['Author_num'] = test_dataframe['Author'].map(swap_dict)
-
-train_dataframe = train_dataframe.drop(columns="Author")
-test_dataframe = test_dataframe.drop(columns="Author")
-
-list_to_choose_train = train_dataframe.text.apply(lambda x : len(x)) > 0 
-train_df_article = train_dataframe[list_to_choose_train]
-list_to_choose_test = test_dataframe.text.apply(lambda x : len(x)) > 0 
-test_df_article = test_dataframe[list_to_choose_test]
-
-train_df_article.to_csv('new_train.csv', index = False)
-test_df_article.to_csv('new_test.csv', index = False)
 
 import torch
 from torchtext.legacy import data
@@ -154,7 +131,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import plot_confusion_matrix
 
 def train_classifier(model, dataset_iterator, loss_function, optimizer, num_epochs, log = "runs", verbose = False, recurrent = True):
-  writer = SummaryWriter(log_dir=log)
+  # writer = SummaryWriter(log_dir=log)
   model.train()
   step = 0
   f1score_train = []
@@ -187,10 +164,10 @@ def train_classifier(model, dataset_iterator, loss_function, optimizer, num_epoc
       total_loss += loss.item()
       f1_step += 1
 
-      if ((step % 100) == 0):
-        writer.add_scalar("Loss/train", total_loss/total, step)
-        writer.add_scalar("Acc/train", correct/total, step)
-        writer.add_scalar("F1 Score/train", f1/f1_step, step)
+      # if ((step % 100) == 0):
+      #   writer.add_scalar("Loss/train", total_loss/total, step)
+      #   writer.add_scalar("Acc/train", correct/total, step)
+      #   writer.add_scalar("F1 Score/train", f1/f1_step, step)
         
       step = step+1
     f1score_train.append(f1/f1_step)
@@ -242,9 +219,8 @@ def evaluate_classifier(model, dataset_iterator, loss_function, recurrent = True
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 plt.figure(figsize = (10,10))
-
 
 output_size = 50
 hidden_size = 300
@@ -304,7 +280,8 @@ output_size = 50
 hidden_size = 300
 vocab_size = len(TEXT.vocab)
 embedding_length = 100
-word_embeddings = TEXT.vocab.vectors
+word_embeddings = TEXT.vocab.v
+ectors
 num_epochs = 1
 mode = 'gru'
 
